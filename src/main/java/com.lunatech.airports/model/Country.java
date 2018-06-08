@@ -11,7 +11,10 @@ import java.util.Map;
 import static com.lunatech.airports.utils.ValueUtils.getLongValue;
 
 @Entity
-@Table
+@Table(indexes = {
+        @Index(name = "Country_Code", columnList = "code", unique = true),
+        @Index(name = "Country_Name", columnList = "name")
+})
 @Data
 @Builder
 @NoArgsConstructor
