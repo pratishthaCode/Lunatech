@@ -18,15 +18,15 @@ import java.util.List;
  */
 
 @RestController
-public class SuggestionsController {
+public class FuzzySearchController {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private CountryDaoService countryService;
-    @RequestMapping("/suggestions")
+    @RequestMapping("/fuzzySearch")
     public String suggestion() {
-        log.info("Suggestions");
+        log.info("fuzzySearch");
         return "provide parameter in this /country/* format";
     }
     /**
@@ -34,7 +34,7 @@ public class SuggestionsController {
      * @param countryParam Country Name prefix
      * @return List of countries with given prefix
      */
-    @RequestMapping("/suggestions/country/{countryParam}")
+    @RequestMapping("/fuzzySearch/country/{countryParam}")
     public List<String> countrySuggestions(@PathVariable String countryParam, @NonNull Model model) {
         log.debug("countrySuggestions for {}", countryParam);
         List<String> suggestions = countryService.countryNamesWithPrefix(countryParam);

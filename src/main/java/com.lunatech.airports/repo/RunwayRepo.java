@@ -1,11 +1,9 @@
-package com.lunatech.airports.db;
+package com.lunatech.airports.repo;
 
 import com.lunatech.airports.model.Runway;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Set;
 
 public interface RunwayRepo extends CrudRepository<Runway, Long> {
 

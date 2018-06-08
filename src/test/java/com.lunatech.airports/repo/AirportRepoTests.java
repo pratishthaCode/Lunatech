@@ -1,4 +1,4 @@
-package com.lunatech.airports.db;
+package com.lunatech.airports.repo;
 
 import com.lunatech.airports.model.Airport;
 import org.junit.Before;

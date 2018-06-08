@@ -1,13 +1,11 @@
 package com.lunatech.airports.dao;
 
-import com.lunatech.airports.db.AirportRepo;
+import com.lunatech.airports.repo.AirportRepo;
 import com.lunatech.airports.model.Airport;
 import com.lunatech.airports.model.Country;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
