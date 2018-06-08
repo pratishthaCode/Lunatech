@@ -1,7 +1,7 @@
 package com.lunatech.airports.dao;
 
-import com.lunatech.airports.repo.AirportRepo;
-import com.lunatech.airports.repo.CountryRepo;
+import com.lunatech.airports.db.AirportRepo;
+import com.lunatech.airports.db.CountryRepo;
 import com.lunatech.airports.model.Country;
 import lombok.NonNull;
 import org.slf4j.Logger;

@@ -1,6 +1,6 @@
 package com.lunatech.airports.dao;
 
-import com.lunatech.airports.repo.RunwayRepo;
+import com.lunatech.airports.db.RunwayRepo;
 import com.lunatech.airports.model.Airport;
 import com.lunatech.airports.model.Country;
 import com.lunatech.airports.model.Runway;

@@ -1,4 +1,4 @@
-package com.lunatech.airports.repo;
+package com.lunatech.airports.db;
 
 import com.lunatech.airports.model.Country;
 import org.springframework.data.repository.CrudRepository;

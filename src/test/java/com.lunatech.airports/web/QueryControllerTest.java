@@ -1,6 +1,6 @@
 package com.lunatech.airports.web;
 
-import com.lunatech.airports.repo.CountryRepo;
+import com.lunatech.airports.db.CountryRepo;
 import com.lunatech.airports.model.Country;
 import org.junit.Test;
 import org.junit.runner.RunWith;

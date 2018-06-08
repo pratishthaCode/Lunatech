@@ -1,8 +1,8 @@
 package com.lunatech.airports;
 
-import com.lunatech.airports.repo.AirportRepo;
-import com.lunatech.airports.repo.CountryRepo;
-import com.lunatech.airports.repo.RunwayRepo;
+import com.lunatech.airports.db.AirportRepo;
+import com.lunatech.airports.db.CountryRepo;
+import com.lunatech.airports.db.RunwayRepo;
 import com.lunatech.airports.model.Airport;
 import com.lunatech.airports.model.Country;
 import com.lunatech.airports.model.Runway;

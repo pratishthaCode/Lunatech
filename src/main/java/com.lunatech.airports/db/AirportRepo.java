@@ -1,4 +1,4 @@
-package com.lunatech.airports.repo;
+package com.lunatech.airports.db;
 
 import com.lunatech.airports.model.Airport;
 import org.springframework.data.jpa.repository.Query;
