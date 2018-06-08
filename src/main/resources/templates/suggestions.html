@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function fetchCountryName() {
+            var country = document.getElementById('countryInput').value;
+            console.debug(window.location.href);
+            window.location.assign("/suggestions/" + country);
+        }
+    </script>
+    <title th:if="${country} != null" th:text="${country.name}"></title>
+    <title th:if="${country} == null" th:text="'Choose Country'"></title>
+</head>
+<body>
+
+
+<nav class="navbar navbar-default" th:fragment="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Lunatech Airports</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/query">Query</a></li>
+            <li><a href="/report">Report</a></li>
+            <li><a href="/suggestions">Suggestions</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="countryInput">Country</label>
+            <input type="text" class="form-control" id="countryInput" placeholder="Country string"/>
+        </div>
+        <button type="button" class="btn btn-default" onclick="
+        fetchCountryName()">Submit</button>
+    </form>
+    <div>
+        <div th:if="${error} != null" class="alert alert-warning fade in">
+            <strong>Warning!</strong> <span th:text="${error}">Error</span>
+        </div>
+        <div th:if="${country} != null">
+            <h2 th:text="'Results for ' + ${country.name}">Country</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Country</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="r : ${rs.value}">
+                        <td th:text="${r.country.name}">Coutry</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

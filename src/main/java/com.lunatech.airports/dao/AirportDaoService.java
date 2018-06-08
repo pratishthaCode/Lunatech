@@ -1,0 +1,29 @@
+package com.lunatech.airports.dao;
+
+import com.lunatech.airports.db.AirportRepo;
+import com.lunatech.airports.model.Airport;
+import com.lunatech.airports.model.Country;
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class AirportDaoService {
+    @Autowired
+    private AirportRepo airportRepository;
+
+    public List<Airport> findAirports(@NonNull Country country) {
+        return airportRepository.findByCountryId(country.getId());
+    }
+
+    public List<Airport> findAirports(@NonNull List<Country> countries) {
+        List<Long> countryIds = countries.stream().map(c -> c.getId()).collect(Collectors.toList());
+        return airportRepository.findByCountryIdIn(countryIds);
+    }
+
+}

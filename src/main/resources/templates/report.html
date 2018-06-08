@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <title>Report</title>
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-default" th:fragment="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Lunatech Airports</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/query">Query</a></li>
+            <li class="active"><a href="/report">Report</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div th:each="rs : ${results}">
+        <h2 th:text="${rs.key}"></h2>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Country</th>
+                    <th>Runway Types</th>
+                    <th>Top 10 Runway Identifications</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r : ${rs.value}">
+                    <td th:text="${r.country.name}">Coutry</td>
+                    <td th:text="${r.runways}">Runway Types</td>
+                    <td th:text="${r.runwayIdentifications}">Top 10 Runway Identifications</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
