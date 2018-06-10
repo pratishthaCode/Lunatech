@@ -4,17 +4,15 @@ import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
 
 /**
- * Rest Controller for Suggestions
+ * Rest Controller for Fuzzy Search
  */
 
 @RestController
@@ -37,7 +35,7 @@ public class FuzzySearchController {
     @RequestMapping("/fuzzySearch/country/{countryParam}")
     public List<String> countrySuggestions(@PathVariable String countryParam, @NonNull Model model) {
         log.debug("countrySuggestions for {}", countryParam);
-        List<String> suggestions = countryService.countryNamesWithPrefix(countryParam);
+        List<String> suggestions = countryService.fetchCountry(countryParam);
         log.info("countrySuggestions for {} => {}", countryParam, suggestions);
         model.addAttribute("results", suggestions);
         log.info("Returning {}", suggestions);

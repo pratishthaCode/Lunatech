@@ -22,7 +22,10 @@ public class RunwayDaoService {
     }
 
     public List<Runway> fetchRunwaysForAirports(@NonNull List<Airport> airports) {
-        List<Long> airportIds = airports.stream().map(a -> a.getId()).collect(Collectors.toList());
+        List<Long> airportIds = airports.
+                                stream().
+                                map(a -> a.getId()).
+                                collect(Collectors.toList());
         return runwayRepo.findByAirportIdIn(airportIds);
     }
 
@@ -31,7 +34,10 @@ public class RunwayDaoService {
     }
 
     public List<Runway> fetchRunwaysForCountries(@NonNull List<Country> countries) {
-        List<Long> countryIds = countries.stream().map(a -> a.getId()).collect(Collectors.toList());
+        List<Long> countryIds = countries.
+                                stream().
+                                map(a -> a.getId()).
+                                collect(Collectors.toList());
         return runwayRepo.findByCountryIdIn(countryIds);
     }
 }

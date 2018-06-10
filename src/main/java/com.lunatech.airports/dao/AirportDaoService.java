@@ -16,12 +16,17 @@ public class AirportDaoService {
     private AirportRepo airportRepository;
 
     public List<Airport> findAirports(@NonNull Country country) {
-        return airportRepository.findByCountryId(country.getId());
+        return airportRepository.
+                findByCountryId(country.getId());
     }
 
     public List<Airport> findAirports(@NonNull List<Country> countries) {
-        List<Long> countryIds = countries.stream().map(c -> c.getId()).collect(Collectors.toList());
-        return airportRepository.findByCountryIdIn(countryIds);
+        List<Long> countryIds = countries.
+                                stream().
+                                map(c -> c.getId()).
+                                collect(Collectors.toList());
+        return airportRepository.
+                findByCountryIdIn(countryIds);
     }
 
 }

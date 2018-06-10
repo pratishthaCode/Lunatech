@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
+    /*
+        Controller to generate report for 10 countries with highest number of airports (with count)
+        and countries with lowest number of airports.
+        Type of runways (as indicated in "surface" column) per country
+        Bonus: Print the top 10 most common runway identifications (indicated in "le_ident" column)
+    */
 @Controller
 public class ReportController {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -42,24 +47,24 @@ public class ReportController {
         /*
             Retrieve top ten countries with highest number of airports
          */
-        List<Country> countriesWithHighestNumberAirports = countryService.topTenCountriesWithMostNumberOfAirports();
+        List<Country> countriesWithHighestNumberAirports = countryService.topCountriesWithMaxAirports();
 
         /*
             Retrieve top ten countries with lowest number of airports
          */
-        List<Country> countriesWithLowestNumberAirports = countryService.topTenCountriesWithLeastNumberOfAirports();
+        List<Country> countriesWithLowestNumberAirports = countryService.topCountriesWithMinAirports();
 
-        Map<String, List<CountryRunwayStats>> runwayStats = new HashMap<>();
-        runwayStats.put("Highest Number Airports", getStatsFast(countriesWithHighestNumberAirports));
-        runwayStats.put("Lowest Number Airports", getStatsFast(countriesWithLowestNumberAirports));
+        Map<String, List<CountryRunwayStats>> countryAirportRunwayMap = new HashMap<>();
+        countryAirportRunwayMap.put("Highest Number Airports", populateCountryAirportRunwayMap(countriesWithHighestNumberAirports));
+        countryAirportRunwayMap.put("Lowest Number Airports", populateCountryAirportRunwayMap(countriesWithLowestNumberAirports));
 
-        model.addAttribute("results", runwayStats);
+        model.addAttribute("results", countryAirportRunwayMap);
         return "report";
     }
-    /*
+        /*
             Retrieval of all runways and corresponding 10 top runway identification on the basis of Le_Ident
-     */
-    public List<CountryRunwayStats> getStatsFast(List<Country> countries) {
+        */
+    public List<CountryRunwayStats> populateCountryAirportRunwayMap(List<Country> countries) {
         Map<Long, List<Runway>> runways = runwaysForCountries(countries);
         return countries.stream().map(c -> {
             CountryRunwayStats stats = new CountryRunwayStats(c);

@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 
 /**
- *  Controller for handling Query on Country Code and Country Name
+ *  Controller for handling Query
+ *  on Country Code and Country Name
  */
 @Controller
 public class QueryController {

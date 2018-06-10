@@ -22,35 +22,46 @@ public class CountryDaoService {
     @Autowired
     private AirportRepo airportRepo;
 
-    public List<String> countryNamesWithPrefix(@NonNull String prefix) {
-        return countryRepo.findByLowerCaseNameStartingWith(prefix.toLowerCase()).stream().map(c -> c.getName()).collect(Collectors.toList());
+    public List<String> fetchCountry(@NonNull String prefix) {
+        return countryRepo.findByLowerCaseNameStartingWith(prefix.toLowerCase())
+                .stream().map(c -> c.getName()).
+                        collect(Collectors.toList());
     }
 
     public Optional<Country> findCountry(@NonNull String countryParam) {
-        Country country = countryRepo.findByLowerCaseName(countryParam.toLowerCase());
+        Country country = countryRepo.
+                          findByLowerCaseName(countryParam.toLowerCase());
+
         if (country == null) {
-            country = countryRepo.findByLowerCaseCode(countryParam.toLowerCase());
+            country = countryRepo.
+                      findByLowerCaseCode(countryParam.toLowerCase());
         }
         if (country == null) {
-            // Bonus handling
-            // If prefix matches only one country, return the same
-            List<String> names = countryNamesWithPrefix(countryParam);
-            if (names.size() == 1) {
-                country = countryRepo.findByLowerCaseName(names.get(0).toLowerCase());
+            List<String> countrySuggestions = fetchCountry(countryParam);
+            if (countrySuggestions.size() == 1) {
+                country = countryRepo.findByLowerCaseName(countrySuggestions.
+                                                            get(0).
+                                                            toLowerCase());
             }
         }
         return Optional.ofNullable(country);
     }
 
-    public List<Country> topTenCountriesWithMostNumberOfAirports() {
-        List<Long> countryIds = airportRepo.fetchCountriesMaxOfAirports().stream().limit(10).collect(Collectors.toList());
-        log.debug("topTenCountriesWithMostNumberOfAirports => {}", countryIds);
+    public List<Country> topCountriesWithMaxAirports() {
+        List<Long> countryIds = airportRepo.
+                                fetchCountriesMaxOfAirports().
+                                stream().
+                                limit(10).
+                                collect(Collectors.toList());
         return countryRepo.findByIdIn(countryIds);
     }
 
-    public List<Country> topTenCountriesWithLeastNumberOfAirports() {
-        List<Long> countryIds = airportRepo.fetchCountriesMinOfAirports().stream().limit(10).collect(Collectors.toList());
-        log.debug("topTenCountriesWithLeastNumberOfAirports => {}", countryIds);
+    public List<Country> topCountriesWithMinAirports() {
+        List<Long> countryIds = airportRepo.
+                                fetchCountriesMinOfAirports().
+                                stream().
+                                limit(10).
+                                collect(Collectors.toList());
         return countryRepo.findByIdIn(countryIds);
     }
 
